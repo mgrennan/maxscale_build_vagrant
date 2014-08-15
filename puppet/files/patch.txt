@@ -1,0 +1,81 @@
+diff --git a/build_gateway.inc b/build_gateway.inc
+index 83ffaf7..a9b6343 100644
+--- a/build_gateway.inc
++++ b/build_gateway.inc
+@@ -22,9 +22,9 @@ UNIX := Y
+ # 
+ # Set MaxScale branch directory
+ #
+-ROOT_PATH := $(HOME)/src/bazaar/tmp/maxscale
++ROOT_PATH := /home/vagrant/maxscale
+ 
+-INC_PATH  := $(HOME)/usr/include
++INC_PATH  := /usr/include
+ #
+ # Set prefix to MySQL Resources
+ #
+@@ -43,11 +43,11 @@ DYNLIB :=
+ #
+ # Set path to Embedded MySQL Server
+ #
+-EMBEDDED_LIB := $(HOME)/usr/lib64
++EMBEDDED_LIB := /usr/lib/i386-linux-gnu
+ ifdef DYNLIB
+-  EMBEDDED_LIB := $(HOME)/usr/lib64/dynlib
++  EMBEDDED_LIB := /usr/lib/i386-linux-gnu
+ endif
+ #
+ # Set path to MySQL errors file
+ # 
+-ERRMSG := $(HOME)/usr/share/mysql
++ERRMSG := /usr/share/mysql/english
+
+diff --git a/test.inc b/test.inc
+index b020368..b283f84 100644
+--- a/test.inc
++++ b/test.inc
+@@ -6,36 +6,36 @@
+ #
+ # THOST         := 127.0.0.1
+ #
+-THOST           := 
++THOST           := 127.0.0.1
+ 
+ #
+ # port of read connection router module, for example:
+ # TPORT_RCONN   := 4008
+ #
+-TPORT_RCONN     :=
++TPORT_RCONN     := 4008
+ #
+ # port of read/write split router module, for example:
+ # TPORT_RW      := 4006
+ #
+-TPORT_RW        :=
++TPORT_RW        := 4006
+ #
+ # username of MaxScale user, for example:
+ # TUSER         := maxuser
+ #
+-TUSER           :=
++TUSER           := maxuser
+ #
+ # password of MaxScale user, for example:
+ # TPWD          := maxpwd
+ #
+-TPWD            :=
++TPWD            := maxpwd
+ #
+ # master's server_id, for example:
+ # TMASTER_ID    := 2
+ #
+-TMASTER_ID      := 
++TMASTER_ID      := 2
+ 
+ #
+ # Global test log where all log is gathered
+ # TEST_MAXSCALE_LOG   := $(ROOT_PATH)/test/test_maxscale.log
+ #
+-TEST_MAXSCALE_LOG   := 
++TEST_MAXSCALE_LOG   := $(ROOT_PATH)/test/test_maxscale.log
+

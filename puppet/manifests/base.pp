@@ -1,0 +1,79 @@
+$mariadb_version = 'mariadb-5.5.35'
+$git_repo        = 'https://github.com/skysql/MaxScale.git'
+$git_branch      = 'master'
+
+$srcdir          = '/home/vagrant/maxscale'
+
+file { '/etc/motd':
+  content => 'SkySQL MaxScale build/test instance'
+}
+
+Exec {
+    path        => [ '/bin/', '/sbin/' , '/usr/bin/', '/usr/sbin/' ],
+    environment => [ "HOME=/home/vagrant" ],
+    cwd         => "/home/vagrant/maxscale",
+}
+
+exec { 'apt-update':
+    command => '/usr/bin/apt-get update',
+    cwd     => '/tmp',
+}
+
+Exec['apt-update'] -> Package <| |>
+
+package { 'git':             ensure => present, }
+
+package { 'build-essential': ensure => present, }
+package { 'libaio-dev':      ensure => present, }
+package { 'libssl-dev':      ensure => present, }
+
+package { 'mariadb-server':  ensure => present, }
+package { 'libmariadbclient-dev': ensure => present, }
+package { 'libmariadbd-dev': ensure => present, }
+
+vcsrepo { "maxscale_git":
+  ensure   => 'latest',
+  path     => $srcdir,
+  require  => [Package['git']],
+  provider => 'git',
+  source   => $git_repo,
+  revision => $git_branch,
+  user     => 'vagrant',
+  owner    => 'vagrant',
+  group    => 'users',
+}
+
+exec { "patch_after_checkout":
+  require => Vcsrepo["maxscale_git"],
+  command => "patch -p1 < /vagrant/puppet/files/patch.txt",
+  onlyif  => "grep -q bazaar build_gateway.inc", 
+}
+
+exec { "make_depend":
+  require => [Exec['patch_after_checkout'], Package['libmariadbclient-dev'], Package['libmariadbd-dev']],
+  command => "make depend",
+}
+
+exec { "make":
+  require => Exec["make_depend"],
+  command => "make",
+}
+
+exec { "make_install":
+  require => Exec["make"],
+  command => "make install",
+  user    => "root",
+  environment => ["DEST=/usr/local"],
+}
+
+service { "mysql":
+  require => Package["mariadb-server"],
+  ensure => stopped,
+}
+
+exec { "start_test_servers":
+  require => Service["mysql"],
+  command => "/vagrant/puppet/files/multi-servers.sh",
+  user    => "root",
+}
+
