@@ -7,9 +7,13 @@ VAGRANTFILE_API_VERSION = "2"
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.hostname = "maxscale-build.local"
 
-  config.vm.box = "trusty32"
+  ### uncomment for Ubunutu Trusty VM
+  # config.vm.box = "trusty32"
+  # config.vm.box_url = "https://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-i386-vagrant-disk1.box"
 
-  config.vm.box_url = "https://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-i386-vagrant-disk1.box"
+  ### uncomment for CentOS 6.4 VM
+  config.vm.box = "centos_64"
+  config.vm.box_url = "http://developer.nrel.gov/downloads/vagrant-boxes/CentOS-6.4-i386-v20131103.box"
 
   config.vm.provider :virtualbox do |vb|
     vb.name = "maxscale_build_vm"
@@ -28,6 +32,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     puppet.manifests_path = "puppet/manifests"
     puppet.module_path    = "puppet/modules"
     puppet.manifest_file  = "base.pp"
+  end
+
+  if Vagrant.has_plugin?("vagrant-cachier")
+    config.cache.scope = :box
   end
 
 end

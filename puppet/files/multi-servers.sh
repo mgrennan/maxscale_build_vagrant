@@ -1,5 +1,8 @@
 #! /bin/bash
 
+mkdir -p /usr/local/mysql
+chown mysql:mysql /usr/local/mysql
+
 for n in 1 2 3
 do 
   if ! test -f /usr/local/mysql/var$n/mysql/user.frm

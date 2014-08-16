@@ -1,8 +1,8 @@
 diff --git a/build_gateway.inc b/build_gateway.inc
-index 83ffaf7..a9b6343 100644
+index 83ffaf7..5ec86f4 100644
 --- a/build_gateway.inc
 +++ b/build_gateway.inc
-@@ -22,9 +22,9 @@ UNIX := Y
+@@ -22,13 +22,13 @@ UNIX := Y
  # 
  # Set MaxScale branch directory
  #
@@ -10,28 +10,33 @@ index 83ffaf7..a9b6343 100644
 +ROOT_PATH := /home/vagrant/maxscale
  
 -INC_PATH  := $(HOME)/usr/include
-+INC_PATH  := /usr/include
++INC_PATH  := $(shell mysql_config --variable=pkgincludedir)
  #
  # Set prefix to MySQL Resources
  #
-@@ -43,11 +43,11 @@ DYNLIB :=
+-MYSQL_ROOT := $(INC_PATH)/mysql
++MYSQL_ROOT := $(INC_PATH)
+ 
+ #
+ # Set prefix of the path to development headers
+@@ -43,11 +43,12 @@ DYNLIB :=
  #
  # Set path to Embedded MySQL Server
  #
 -EMBEDDED_LIB := $(HOME)/usr/lib64
-+EMBEDDED_LIB := /usr/lib/i386-linux-gnu
++EMBEDDED_LIB := $(shell mysql_config --variable=pkglibdir)
  ifdef DYNLIB
 -  EMBEDDED_LIB := $(HOME)/usr/lib64/dynlib
-+  EMBEDDED_LIB := /usr/lib/i386-linux-gnu
++  EMBEDDED_LIB := $EMBEDDED_LIB
  endif
++
  #
  # Set path to MySQL errors file
  # 
 -ERRMSG := $(HOME)/usr/share/mysql
 +ERRMSG := /usr/share/mysql/english
-
 diff --git a/test.inc b/test.inc
-index b020368..b283f84 100644
+index b020368..50c7090 100644
 --- a/test.inc
 +++ b/test.inc
 @@ -6,36 +6,36 @@
