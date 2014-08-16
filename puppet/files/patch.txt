@@ -27,7 +27,7 @@ index 83ffaf7..5ec86f4 100644
 +EMBEDDED_LIB := $(shell mysql_config --variable=pkglibdir)
  ifdef DYNLIB
 -  EMBEDDED_LIB := $(HOME)/usr/lib64/dynlib
-+  EMBEDDED_LIB := $EMBEDDED_LIB
++  EMBEDDED_LIB := $(EMBEDDED_LIB)
  endif
 +
  #
