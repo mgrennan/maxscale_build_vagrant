@@ -21,3 +21,6 @@ The included puppet manifest will take care of:
 You can then log into the virtual machine with "vagrant ssh", 
 MaxScale source is in the "maxscale" directory once you're
 on the virtual machine ...
+
+The setup currently supports both Ubuntu 14.04 'Trusty' and CentOS 6.4.
+You can select the appropriate VM image by editing Vagrantfile
