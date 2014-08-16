@@ -21,6 +21,16 @@ $arch = $architecture ? {
   default => $architecture,  
 }
 
+include ulimit
+
+ulimit::rule {
+  'coresize':
+    ulimit_domain => '*',
+    ulimit_type   => 'soft',
+    ulimit_item   => 'core',
+    ulimit_value  => 'unlimited';
+}
+
 # OS specific preparations
 case $operatingsystem {
 

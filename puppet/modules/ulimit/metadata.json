@@ -1,0 +1,29 @@
+{
+  "name": "arioch-ulimit",
+  "version": "0.0.1",
+  "source": "UNKNOWN",
+  "author": "Tom De Vylder",
+  "license": "Apache License, Version 2.0",
+  "summary": "Ulimit module",
+  "description": "Ulimit module",
+  "project_page": "http://arioch.github.io/puppet-ulimit/",
+  "dependencies": [
+
+  ],
+  "types": [
+
+  ],
+  "checksums": {
+    "Gemfile": "6545dc55800b7ef2d742d3d96791ea38",
+    "Gemfile.lock": "4e7ef6deb4ca2da5e29c484477919997",
+    "LICENSE": "1906cc9accb05dcaf61c8cda63402170",
+    "Modulefile": "70ad22bbf229818893161832b775f860",
+    "README.md": "a199de5e16bf68cbf273e77c9dfeca7a",
+    "manifests/config.pp": "5801261b15fb158c63f8c23ea6725219",
+    "manifests/init.pp": "86d166e92834d77335977cae7697b1d9",
+    "manifests/params.pp": "d9b2ff04ce6f02efc5a78e328d7897a0",
+    "manifests/rule.pp": "dc78ccdc681e46f6f694dfc57601d858",
+    "templates/rule.conf.erb": "49dc4279e4e24132f513c1b0fac8c4c0",
+    "tests/init.pp": "4328921c3e7cd2f97539d6c5cee4dab6"
+  }
+}
