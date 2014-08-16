@@ -101,7 +101,8 @@ case $operatingsystem {
 }
  
 package { 'git':             ensure => present, }
-package { 'patch':           ensure => present }
+package { 'patch':           ensure => present, }
+package { 'gdb':             ensure => present, }
 
 package { 'libssl-dev':      ensure => present, name => $pkg_libssl_dev, }
 package { 'libaio-dev':      ensure => present, name => $pkg_libaio_dev, }
