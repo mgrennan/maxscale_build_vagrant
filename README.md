@@ -60,15 +60,20 @@ puppet-config.pp.
 The actual puppet manifest is in puppet/manifests/base.pp,
 it takes care of 
 
-* installing all necessary packages, 
+* installing all necessary packages
 * enabling core dumps
 * checking out MaxScale source
 * building and installing MaxScale
 * starting and configuring three mysqld instances in 
   a master/slave setup suitable for running the bundled tests
 
-Running the tests is not part of the process yet as I think
-that this should be done manually and output should be watched.
+and currently works for both CentOS 6.4 and Ubuntu 12.04 'Trusty'.
+Support for other distributions and distro versions shouldn't 
+be too hard but will require some extra tweaking and testing.
+
+Running the actual maxscale test is not part of the process yet 
+as I think that this should be done manually and output should 
+be watched.
 
 Test setup
 ----------
