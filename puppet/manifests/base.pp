@@ -112,6 +112,8 @@ package { 'patch':           ensure => present, }
 # install GNU debugger
 package { 'gdb':             ensure => present, }
 
+# install Midnight Commander (who can live without it?)
+package { 'mc':              ensure => present, }
 
 # enable core dumps
 include ulimit
